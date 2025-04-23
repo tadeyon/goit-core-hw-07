@@ -1,6 +1,6 @@
 from collections import UserDict
 from Record import Record
-from datetime import date,timedelta
+from datetime import date,datetime,timedelta
 
 class AddressBook(UserDict):
     def __init__(self):
@@ -31,7 +31,7 @@ class AddressBook(UserDict):
             if record.birthday is None:
                 continue
 
-            bday_this_year = record.birthday.value.replace(year=today.year)
+            bday_this_year = (datetime.strptime(record.birthday.value, "%d.%m.%Y").date()).replace(year=today.year)
 
             if bday_this_year < today:
                 bday_this_year = bday_this_year.replace(year=today.year + 1)
